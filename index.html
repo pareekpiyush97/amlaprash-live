@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ChoKho Chhe — Amlaprash</title>
+<meta name="description" content="ChoKho Chhe Amlaprash — asli hai isliye aasan hai. Amla, 45 herbs, desi ghee, forest honey. No refined sugar. Recipe from Bikaner, made in Sitapura, Jaipur." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Mukta:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+:root{
+  --green:#244242;--green-d:#1b3333;--cream:#fcf5eb;--paper:#fdfaf3;
+  --pink:#ffcfe2;--pink-band:#fde3e9;--olive:#c4cb7e;--olive-card:#e8e6c5;--olive-pill:#bec076;
+  --maroon:#8d2f50;--amber:#b9773d;--brown:#814624;--brown-d:#6e3a1e;
+  --ink:#191a17;--ink-soft:#6c6f66;--line:rgba(25,26,23,.14);--line-l:rgba(252,245,235,.16);
+  --maxw:1180px;--r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
+.dev{font-family:'Mukta',sans-serif}
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(20px,5vw,56px)}
+a{color:inherit;text-decoration:none}button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img{display:block;max-width:100%}
+::selection{background:var(--amber);color:#fff}
+.eyebrow{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-weight:600;color:var(--amber)}
+h2.head{font-weight:600;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.05;letter-spacing:-.025em}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:600;font-size:.9rem;border-radius:999px;transition:.25s;padding:15px 28px}
+.btn-brown{background:var(--brown);color:var(--cream);box-shadow:0 6px 0 var(--brown-d)}
+.btn-brown:active{transform:translateY(3px);box-shadow:0 3px 0 var(--brown-d)}
+.btn-brown:hover{background:#8d4e28}
+.reveal{opacity:0;transform:translateY(26px)}
+
+/* Top bar */
+.topbar{background:#000;color:#cfc9bd;text-align:center;font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;padding:9px 10px}
+.topbar span{margin:0 14px;white-space:nowrap}
+@media(max-width:620px){.topbar span:nth-child(2){display:none}}
+
+/* Nav */
+header.nav{position:sticky;top:0;z-index:70;background:var(--green);color:var(--cream);display:flex;align-items:center;justify-content:space-between;padding:16px clamp(20px,5vw,56px)}
+header.nav.alt{background:var(--green)}
+.nav .dots{font-size:1.5rem;letter-spacing:2px;line-height:.5;cursor:pointer;width:40px}
+.nav .logo{font-family:'Mukta',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.04em}
+.nav .cart{width:40px;display:flex;justify-content:flex-end;position:relative}
+.nav .cart svg{width:22px;height:22px}
+.nav .cart .cc{position:absolute;top:-6px;right:-8px;background:var(--amber);color:#fff;font-size:.6rem;font-weight:700;min-width:16px;height:16px;border-radius:999px;display:grid;place-items:center}
+.menu{position:fixed;inset:0;background:rgba(36,66,66,.97);z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;opacity:0;pointer-events:none;transition:.3s}
+.menu.open{opacity:1;pointer-events:auto}
+.menu a{color:var(--cream);font-size:1.6rem;font-weight:600;font-family:'Inter'}
+.menu .x{position:absolute;top:24px;right:28px;font-size:2rem;color:var(--cream)}
+
+/* Hero */
+#hero{background:var(--green);color:var(--cream);padding:clamp(40px,7vw,80px) 0 clamp(50px,8vw,90px)}
+#hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+@media(max-width:860px){#hero .grid{grid-template-columns:1fr;text-align:center}}
+#hero .tagsmall{font-size:.82rem;color:#b7c4c0;margin-bottom:22px}
+#hero h1{font-family:'Mukta',sans-serif;font-weight:600;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.12;letter-spacing:-.01em}
+#hero .sub-en{font-style:italic;color:#9fb0ab;font-size:.95rem;margin-top:14px}
+#hero .body{color:#cdd6d2;max-width:42ch;margin-top:22px;font-size:1.02rem}
+@media(max-width:860px){#hero .body{margin-inline:auto}}
+#hero .cta-row{display:flex;align-items:center;gap:22px;margin-top:34px;flex-wrap:wrap}
+@media(max-width:860px){#hero .cta-row{justify-content:center}}
+.pill-dashed{background:var(--olive-pill);color:var(--green-d);font-weight:700;padding:15px 30px;border-radius:999px;font-size:.9rem;position:relative;letter-spacing:.02em}
+.pill-dashed::after{content:"";position:absolute;inset:4px;border:1.5px dashed rgba(36,66,66,.5);border-radius:999px;pointer-events:none}
+#hero .skip{color:var(--cream);font-size:.88rem;border-bottom:1px solid rgba(252,245,235,.4);padding-bottom:3px}
+#hero .stats{display:flex;gap:46px;margin-top:46px;border-top:1px solid var(--line-l);padding-top:24px}
+@media(max-width:860px){#hero .stats{justify-content:center;gap:34px}}
+#hero .stats .s b{font-size:1.9rem;font-weight:600;display:block}
+#hero .stats .s span{font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:#9fb0ab}
+#hero .heroimg{display:grid;place-items:center}
+#hero .heroimg img{width:min(100%,440px);border-radius:14px}
+
+/* Story */
+#story{background:var(--cream);padding-block:clamp(70px,10vw,120px)}
+#story h2{max-width:16ch;margin-top:10px}
+.scenes{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+@media(max-width:900px){.scenes{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:540px){.scenes{grid-template-columns:1fr}}
+.scene{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column}
+.scene .pic{aspect-ratio:1/1;display:grid;place-items:center;overflow:hidden}
+.scene .pic img{width:100%;height:100%;object-fit:cover}
+.scene.c1 .pic{background:var(--paper)} .scene.c1{background:var(--paper)}
+.scene.c2 .pic{background:var(--pink)} .scene.c2{background:var(--pink)}
+.scene.c3 .pic{background:var(--maroon)} .scene.c3{background:var(--maroon);color:var(--cream)}
+.scene.c4 .pic{background:var(--olive)} .scene.c4{background:var(--olive)}
+.scene .txt{padding:18px 20px 22px}
+.scene .sc{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;opacity:.65;font-weight:600}
+.scene .st{font-weight:600;font-size:1.05rem;margin-top:8px;line-height:1.25}
+.scene.c3 .st,.scene.c3 .sc{color:var(--cream)}
+/* sticky quick add */
+#quickbar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(140%);z-index:65;transition:.45s cubic-bezier(.2,.8,.2,1);
+  background:var(--paper);border:1px solid var(--line);border-radius:999px;box-shadow:0 20px 50px -20px rgba(0,0,0,.35);
+  display:flex;align-items:center;gap:12px;padding:8px 8px 8px 22px;max-width:92vw}
+#quickbar.show{transform:translateX(-50%) translateY(0)}
+#quickbar .qp{font-weight:600;font-size:.92rem;white-space:nowrap}
+#quickbar .sizes{display:flex;gap:6px}
+#quickbar .sz{border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:.78rem;font-weight:600;transition:.2s}
+#quickbar .sz.on{background:#000;color:#fff;border-color:#000}
+#quickbar .add{background:var(--brown);color:var(--cream);border-radius:999px;padding:11px 20px;font-weight:600;font-size:.82rem;white-space:nowrap}
+@media(max-width:620px){#quickbar .qp{display:none}#quickbar{padding-left:14px}}
+
+/* Product */
+#product{background:var(--cream);padding-block:clamp(40px,6vw,80px)}
+.prod-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:start}
+@media(max-width:860px){.prod-grid{grid-template-columns:1fr}}
+.prod-media .main{border-radius:var(--r);overflow:hidden;background:var(--olive-card)}
+.prod-media .main img{width:100%}
+.prod-media .thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
+.prod-media .thumbs .t{aspect-ratio:1/1;border-radius:12px;overflow:hidden;border:1px solid var(--line);cursor:pointer}
+.prod-media .thumbs .t.t1{background:var(--paper)} .prod-media .thumbs .t.t2{background:var(--maroon)}
+.prod-media .thumbs .t.t3{background:var(--pink)} .prod-media .thumbs .t.t4{background:var(--olive)}
+.prod-media .thumbs .t img{width:100%;height:100%;object-fit:cover}
+.prod-info .peye{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);font-weight:600}
+.prod-info h1{font-weight:600;font-size:clamp(2.2rem,5vw,3.2rem);letter-spacing:-.02em;margin:8px 0 18px}
+.priceph{display:inline-flex;align-items:center;gap:8px;border:1px dashed var(--amber);border-radius:8px;padding:9px 14px}
+.priceph .lab{font-size:.56rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:700;position:absolute;transform:translateY(-22px)}
+.priceph .amt{font-weight:600;font-size:1.3rem}
+.price-wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.price-wrap .tax{font-size:.82rem;color:var(--ink-soft)}
+.prod-info .pdesc{color:var(--ink-soft);max-width:46ch;margin:20px 0 26px}
+.sizelab{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);font-weight:600;margin-bottom:10px}
+.sizes-row{display:flex;gap:10px;flex-wrap:wrap}
+.size{border:1px solid var(--line);border-radius:999px;padding:12px 20px;font-weight:600;font-size:.9rem;transition:.2s}
+.size small{color:var(--ink-soft);font-weight:500}
+.size.on{background:#000;color:#fff;border-color:#000}.size.on small{color:#bbb}
+.qtyrow{display:flex;align-items:center;gap:14px;margin:22px 0}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px}
+.qty button{padding:12px 16px;font-size:1.1rem}.qty span{min-width:22px;text-align:center;font-weight:600}
+.prod-info .btn-brown,.prod-info .btn-buy{width:100%;margin-bottom:12px}
+.btn-buy{display:block;width:100%;text-align:center;border:1px solid var(--line);border-radius:999px;padding:15px;font-weight:600;background:var(--paper)}
+.prod-info .btn-buy:hover{border-color:var(--ink)}
+.specrow{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;border-top:1px solid var(--line);margin-top:26px;padding-top:22px}
+.specrow .sp b{display:block;font-weight:600;font-size:1.05rem}
+.specrow .sp span{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.acc{border-top:1px solid var(--line);margin-top:26px}
+.acc .item{border-bottom:1px solid var(--line)}
+.acc .q{display:flex;justify-content:space-between;align-items:center;gap:16px;width:100%;text-align:left;padding:20px 2px;font-weight:600;font-size:1.02rem}
+.acc .q .ic{font-size:1.3rem;color:var(--ink-soft);transition:.3s}
+.acc .a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.acc .a p{color:var(--ink-soft);padding:0 2px 20px;max-width:52ch;font-size:.95rem}
+.acc .item.open .ic{transform:rotate(45deg)}
+
+/* Ingredients */
+#ingredients{background:var(--maroon);color:var(--cream);padding-block:clamp(70px,9vw,110px)}
+#ingredients .ihead{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+#ingredients .eyebrow{color:#e9b8c8}
+#ingredients h2{color:var(--cream)}
+#ingredients .sub{color:#e4bfcc;margin-top:14px}
+#ingredients .big45{font-weight:700;font-size:clamp(4rem,12vw,8.5rem);color:var(--olive-pill);line-height:.8;letter-spacing:-.04em}
+@media(max-width:700px){#ingredients .big45{display:none}}
+.ticket{background:var(--paper);color:var(--ink);border-radius:6px;margin-top:40px;position:relative;padding:48px clamp(20px,4vw,48px)}
+.ticket::before,.ticket::after{content:"";position:absolute;left:0;right:0;height:16px;background-image:radial-gradient(circle at 10px 0,transparent 10px,var(--paper) 11px);background-size:20px 16px}
+.ticket::before{top:-15px;transform:rotate(180deg)}.ticket::after{bottom:-15px}
+.itable{display:grid;grid-template-columns:repeat(4,1fr);gap:0 clamp(18px,3vw,34px)}
+@media(max-width:860px){.itable{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.itable{grid-template-columns:1fr}}
+.ing{padding:14px 0;border-bottom:1px solid var(--line)}
+.ing b{display:block;font-weight:600;font-size:.98rem}
+.ing i{font-size:.8rem;color:var(--ink-soft);font-style:italic}
+
+/* Origin */
+#origin{background:var(--cream);padding-block:clamp(70px,10vw,120px)}
+.origin-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+@media(max-width:860px){.origin-grid{grid-template-columns:1fr}}
+#origin h2{max-width:11ch}
+.origin-left{display:flex;flex-direction:column;gap:30px}
+.origin-fig{display:grid;place-items:center}
+.origin-fig img{width:min(240px,60%)}
+.timeline .row{display:grid;grid-template-columns:150px 1fr;gap:20px;border-top:1px solid var(--line);padding:22px 0}
+@media(max-width:480px){.timeline .row{grid-template-columns:1fr;gap:4px}}
+.timeline .row b{font-weight:600;font-size:1.1rem}
+.timeline .row p{color:var(--ink-soft);font-size:.95rem}
+
+/* Trust */
+#trust{background:var(--green);color:var(--cream);padding-block:clamp(70px,9vw,110px)}
+#trust .eyebrow{color:#8fb0a5}#trust h2{color:var(--cream)}
+.trust-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:46px}
+@media(max-width:760px){.trust-grid{grid-template-columns:1fr}}
+.tcard{border:1px solid var(--line-l);border-radius:var(--r);padding:30px;min-height:160px;display:flex;flex-direction:column;justify-content:space-between}
+.tcard .lab{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;color:#8fb0a5}
+.tcard .val{font-size:1.5rem;font-weight:600;margin-top:40px}
+.tcard.muted .val{color:#7f9a90}
+
+/* Reviews */
+#reviews{background:var(--cream);padding-block:clamp(70px,10vw,120px)}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-top:46px}
+@media(max-width:900px){.rev-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rev-grid{grid-template-columns:1fr}}
+.rev{border:1px solid var(--line);border-radius:var(--r);padding:26px;background:var(--paper)}
+.rev.hl{background:var(--green);color:var(--cream);border-color:var(--green)}
+.rev.hl .brand{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#8fb0a5;margin-bottom:14px}
+.rev.hl .q{font-weight:600;font-size:1.25rem;line-height:1.3}
+.rev .stars{color:var(--amber);letter-spacing:2px;margin-bottom:14px}
+.rev p{color:var(--ink-soft);font-size:.95rem;margin-bottom:18px}
+.rev .who{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);font-weight:600}
+
+/* FAQ */
+#faq{background:var(--cream);padding-block:clamp(40px,6vw,70px)}
+.faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(24px,4vw,50px)}
+@media(max-width:760px){.faq-grid{grid-template-columns:1fr}}
+#faq h2{max-width:8ch}
+
+/* Final CTA */
+#finalcta{background:var(--cream);padding-block:clamp(50px,7vw,90px)}
+.fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:center}
+@media(max-width:860px){.fc-grid{grid-template-columns:1fr;text-align:center}}
+.fc-fig{position:relative;display:grid;place-items:center}
+.fc-fig img{width:min(100%,420px)}
+.speech{position:absolute;top:0;left:8%;background:var(--paper);border:1.5px solid var(--ink);border-radius:14px 14px 14px 2px;padding:12px 18px;font-weight:600;font-size:.98rem;z-index:2}
+.speech::after{content:"";position:absolute;bottom:-10px;left:26px;border:6px solid transparent;border-top-color:var(--paper);filter:drop-shadow(0 1px 0 var(--ink))}
+#finalcta h2{font-family:'Mukta',sans-serif;font-weight:600;letter-spacing:0}
+.fc-right .sizes-row{margin:24px 0}
+@media(max-width:860px){.fc-right .sizes-row{justify-content:center}}
+
+/* Contact */
+#contact{background:var(--pink-band);padding-block:clamp(60px,8vw,100px)}
+.ct-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:clamp(24px,4vw,50px);align-items:center}
+@media(max-width:900px){.ct-grid{grid-template-columns:1fr;text-align:center}}
+.ct-fig img{width:150px}
+@media(max-width:900px){.ct-fig{display:flex;justify-content:center}}
+.ct-copy .eyebrow{color:#c06a86}
+.ct-copy h2{font-weight:600;margin-top:10px}
+.ct-form{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px}
+@media(max-width:900px){.ct-form{text-align:left;max-width:460px;margin-inline:auto}}
+.ct-form .f{display:flex;flex-direction:column}
+.ct-form .f.full{grid-column:1/-1}
+.ct-form label{font-size:.82rem;color:#333;margin-bottom:4px}
+.ct-form input,.ct-form textarea{background:transparent;border:none;border-bottom:1px solid rgba(25,26,23,.3);padding:8px 0;font-family:inherit;font-size:.95rem;color:var(--ink);resize:none}
+.ct-form input:focus,.ct-form textarea:focus{outline:none;border-color:var(--brown)}
+.ct-form .send{grid-column:1/-1;justify-self:start}
+@media(max-width:900px){.ct-form .send{justify-self:center}}
+
+/* Footer */
+footer.site{background:#000;color:#cfc9bd;padding-block:60px 30px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px}
+@media(max-width:760px){.fgrid{grid-template-columns:1fr 1fr}}
+footer .flogo{font-family:'Mukta',sans-serif;font-weight:700;font-size:1.8rem;color:#fff;letter-spacing:.04em}
+footer h4{font-size:.64rem;letter-spacing:.18em;text-transform:uppercase;color:#8a8577;margin-bottom:16px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:11px;font-size:.9rem}
+footer ul a{color:#cfc9bd;transition:.2s}footer ul a:hover{color:#fff}
+footer .fbar{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:.74rem;color:#8a8577}
+
+/* Cart drawer */
+#ov{position:fixed;inset:0;background:rgba(25,26,23,.5);z-index:90;opacity:0;pointer-events:none;transition:.3s}
+#ov.open{opacity:1;pointer-events:auto}
+#cart{position:fixed;top:0;right:0;height:100%;width:min(400px,92vw);background:var(--cream);z-index:95;transform:translateX(100%);transition:.4s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column}
+#cart.open{transform:translateX(0)}
+#cart .ch{display:flex;justify-content:space-between;align-items:center;padding:22px 24px;border-bottom:1px solid var(--line)}
+#cart .ch h3{font-weight:600;font-size:1.2rem}#cart .ch button{font-size:1.5rem}
+#cart .items{flex:1;overflow:auto;padding:10px 24px}
+#cart .ci{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+#cart .ci img{width:52px;height:52px;border-radius:10px;object-fit:cover;background:var(--olive-card)}
+#cart .ci b{font-weight:600;font-size:.96rem}#cart .ci span{font-size:.78rem;color:var(--ink-soft);display:block}
+#cart .ci .rm{font-size:.74rem;color:var(--maroon);margin-top:4px;cursor:pointer}
+#cart .ci .p{margin-left:auto;font-weight:600}
+#cart .empty{padding:50px 24px;text-align:center;color:var(--ink-soft)}
+#cart .foot{padding:22px 24px;border-top:1px solid var(--line)}
+#cart .foot .tot{display:flex;justify-content:space-between;font-weight:600;font-size:1.15rem;margin-bottom:16px}
+#cart .foot .note{font-size:.7rem;color:var(--ink-soft);text-align:center;margin-top:10px;letter-spacing:.04em}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--green);color:var(--cream);padding:13px 22px;border-radius:999px;z-index:120;opacity:0;pointer-events:none;transition:.3s;font-size:.9rem;font-weight:500}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:left;z-index:100}
+.scene{transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s}
+.scene:hover{transform:translateY(-6px);box-shadow:0 22px 44px -22px rgba(0,0,0,.28)}
+.tcard{transition:transform .3s,border-color .3s}
+.tcard:hover{transform:translateY(-4px);border-color:rgba(252,245,235,.45)}
+.prod-media .thumbs .t{transition:transform .25s,box-shadow .25s}
+.prod-media .thumbs .t:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(0,0,0,.3)}
+.ing{transition:color .2s}.ing:hover b{color:var(--maroon)}
+.heroimg img,.scene .pic img,.origin-fig img,.fc-fig img,.ct-fig img{will-change:transform}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1!important;transform:none!important}#progress{display:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<div class="topbar"><span>FSSAI Licensed</span><span>•</span><span>Lab-tested Annually</span><span>•</span><span>Made in Sitapura, Jaipur</span></div>
+
+<header class="nav" id="nav">
+  <div class="dots" onclick="toggleMenu()" aria-label="Menu">···</div>
+  <a href="#hero" class="logo dev">चोखो·छे</a>
+  <button class="cart" onclick="openCart()" aria-label="Cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/></svg>
+    <span class="cc" id="navCount">0</span>
+  </button>
+</header>
+
+<div class="menu" id="menu">
+  <div class="x" onclick="toggleMenu()">×</div>
+  <a href="#product" onclick="toggleMenu()">Amlaprash</a>
+  <a href="#ingredients" onclick="toggleMenu()">Ingredients</a>
+  <a href="#origin" onclick="toggleMenu()">Our story</a>
+  <a href="#reviews" onclick="toggleMenu()">Reviews</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap grid">
+    <div class="hero-copy">
+      <div class="tagsmall reveal">ChoKho Chhe / AmlaPrash</div>
+      <h1 class="dev reveal">असली है<br>इसलिए आसान है।</h1>
+      <div class="sub-en reveal">(real things are simple)</div>
+      <p class="body reveal">Amla ka gaadha, chammach-wala avatar. Amla samet 45 cheezein, desi ghee mein dheemi aanch par pakti hain.</p>
+      <div class="cta-row reveal">
+        <button class="pill-dashed" onclick="addToCart()">GET YOURS</button>
+        <a href="#story" class="skip">Skip the story ↓</a>
+      </div>
+      <div class="stats reveal">
+        <div class="s"><b>45</b><span>Ingredients</span></div>
+        <div class="s"><b>3</b><span>Sizes · 200g–1kg</span></div>
+        <div class="s"><b>FSSAI</b><span>Licensed</span></div>
+      </div>
+    </div>
+    <div class="heroimg reveal"><img src="hero_jar.jpg" alt="ChoKho Chhe Amlaprash jar" /></div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section id="story">
+  <div class="wrap">
+    <div class="eyebrow reveal">The Story</div>
+    <h2 class="head reveal">Golu chakhta hai. Mishti recommend karti hai.</h2>
+    <div class="scenes">
+      <div class="scene c1 reveal"><div class="pic"><img src="s1_jar.jpg" alt="The jar"/></div><div class="txt"><div class="sc">Scene 1</div><div class="st">Nani ko ye pasand aata</div></div></div>
+      <div class="scene c2 reveal"><div class="pic"><img src="s2_boy.jpg" alt="Golu tastes"/></div><div class="txt"><div class="sc">Scene 2 · Golu tastes</div><div class="st">Dadi iske liye haan kar detin</div></div></div>
+      <div class="scene c3 reveal"><div class="pic"><img src="s3_label.jpg" alt="Label unrolls"/></div><div class="txt"><div class="sc">Scene 3 · Label unrolls</div><div class="st">45 ingredients, one label</div></div></div>
+      <div class="scene c4 reveal"><div class="pic"><img src="s4_girl.jpg" alt="Mishti recommends"/></div><div class="txt"><div class="sc">Scene 4 · Mishti recommends</div><div class="st">Dadi ki baat ab sense bana rahi hai</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="product">
+  <div class="wrap prod-grid">
+    <div class="prod-media reveal">
+      <div class="main"><img src="product_main.jpg" alt="Golu with the Amlaprash jar"/></div>
+      <div class="thumbs">
+        <div class="t t1" onclick="swapMain('s1_jar.jpg')"><img src="s1_jar.jpg" alt=""/></div>
+        <div class="t t2" onclick="swapMain('s3_label.jpg')"><img src="s3_label.jpg" alt=""/></div>
+        <div class="t t3" onclick="swapMain('s2_boy.jpg')"><img src="s2_boy.jpg" alt=""/></div>
+        <div class="t t4" onclick="swapMain('s4_girl.jpg')"><img src="s4_girl.jpg" alt=""/></div>
+      </div>
+    </div>
+    <div class="prod-info reveal">
+      <div class="peye">ChoKho Chhe</div>
+      <h1>Amlaprash</h1>
+      <div class="price-wrap">
+        <span class="priceph"><span class="amt" id="priceNow">₹299</span></span>
+        <span class="tax">Taxes included · from Shopify</span>
+      </div>
+      <p class="pdesc">Ghar waalon ko ye itni pasand thi ki decades tak bechi hi nahi, bas apno mein baant li. Ab aap bhi apno mein ho.</p>
+      <div class="sizelab">Size</div>
+      <div class="sizes-row" id="sizes">
+        <button class="size on" data-size="200g" data-price="299" onclick="pickSize(this)">200g</button>
+        <button class="size" data-size="500g" data-price="649" onclick="pickSize(this)">500g</button>
+        <button class="size" data-size="1kg" data-price="1199" onclick="pickSize(this)">1kg <small>(500g × 2)</small></button>
+      </div>
+      <div class="qtyrow">
+        <div class="qty"><button onclick="bumpQty(-1)">−</button><span id="qtyVal">1</span><button onclick="bumpQty(1)">+</button></div>
+      </div>
+      <button class="btn btn-brown" onclick="addToCart()">ADD TO CART</button>
+      <a class="btn-buy" onclick="addToCart(true)">BUY IT NOW</a>
+      <div class="specrow">
+        <div class="sp"><b>12221027000524</b><span>FSSAI Licence</span></div>
+        <div class="sp"><b>Annually</b><span>Lab-tested</span></div>
+        <div class="sp"><b>45</b><span>Ingredients</span></div>
+      </div>
+      <div class="acc" id="acc">
+        <div class="item open"><button class="q" onclick="toggleAcc(this)">Shipping &amp; returns<span class="ic">+</span></button><div class="a"><p>If a jar arrives spoiled, or it just doesn't sit right with you, let us know within about a week of opening it — we'll replace it or refund you.</p></div></div>
+        <div class="item"><button class="q" onclick="toggleAcc(this)">Taste &amp; use<span class="ic">+</span></button><div class="a"><p>One teaspoon on an empty stomach, straight or stirred into warm water or milk. Chew the amla pieces. Tangy-sweet and warming, never cloying.</p></div></div>
+        <div class="item"><button class="q" onclick="toggleAcc(this)">What's in it<span class="ic">+</span></button><div class="a"><p>Amla slow-cooked in A2 desi ghee and forest honey with 40+ Ayurvedic herbs. No refined sugar, no preservatives, no added colours.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INGREDIENTS -->
+<section id="ingredients">
+  <div class="wrap">
+    <div class="ihead">
+      <div>
+        <div class="eyebrow reveal">Formulation</div>
+        <h2 class="head reveal" style="margin-top:12px">Label khol ke dekho.</h2>
+        <p class="sub reveal">Every ingredient, with its botanical name.</p>
+      </div>
+      <div class="big45 reveal">45</div>
+    </div>
+    <div class="ticket reveal"><div class="itable" id="itable"></div></div>
+  </div>
+</section>
+
+<!-- ORIGIN -->
+<section id="origin">
+  <div class="wrap origin-grid">
+    <div class="origin-left">
+      <div>
+        <div class="eyebrow reveal">Origin</div>
+        <h2 class="head reveal" style="margin-top:12px">This recipe didn't start as a business.</h2>
+      </div>
+      <div class="origin-fig reveal"><img src="origin_boy.jpg" alt="Golu"/></div>
+    </div>
+    <div class="timeline reveal">
+      <div class="row"><b>At fifteen</b><p>Learned from Vaidya ji in Bikaner.</p></div>
+      <div class="row"><b>Eight years</b><p>Of apprenticeship, until the formulation became second nature.</p></div>
+      <div class="row"><b>For decades</b><p>A family ritual, made for the people around us. Never sold.</p></div>
+      <div class="row"><b>Today</b><p>Made at our own facility in Sitapura, Jaipur. Same recipe, just no longer only for us.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section id="trust">
+  <div class="wrap">
+    <div class="eyebrow reveal">Trust</div>
+    <h2 class="head reveal" style="margin-top:12px">Okay, but can you trust it?</h2>
+    <div class="trust-grid">
+      <div class="tcard reveal"><div class="lab">FSSAI Licence</div><div class="val">12221027000524</div></div>
+      <div class="tcard reveal"><div class="lab">Lab Testing</div><div class="val">Lab-tested annually</div></div>
+      <div class="tcard muted reveal"><div class="lab">HACCP</div><div class="val">In progress, not certified yet</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="eyebrow reveal">Reviews</div>
+    <h2 class="head reveal" style="margin-top:12px">Ghar waalon ki raay.</h2>
+    <div class="rev-grid">
+      <div class="rev hl reveal"><div class="brand">ChoKho Chhe</div><div class="q">Nani ne toh pehle hi bola tha</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><p>"Bilkul ghar jaisa. Ek chammach roz, aur sardiyon mein farq saaf dikhta hai."</p><div class="who">Meera S. · Jaipur</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><p>"Switched from a sugary chyawanprash — you can taste that it's honey, not syrup."</p><div class="who">Arjun P. · Bikaner</div></div>
+      <div class="rev reveal"><div class="stars">★★★★★</div><p>"Clean ingredients I can actually read. The kids take it without a fuss now."</p><div class="who">Ritu K. · Ahmedabad</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div><div class="eyebrow reveal">FAQ</div><h2 class="head reveal" style="margin-top:12px">Kuch poochna hai?</h2></div>
+    <div class="acc reveal" id="faqacc">
+      <div class="item open"><button class="q" onclick="toggleAcc(this)">What is the shelf life?<span class="ic">+</span></button><div class="a"><p>Unopened, about 12 months from the batch date on the lid. Once opened, best finished within 2–3 months.</p></div></div>
+      <div class="item"><button class="q" onclick="toggleAcc(this)">How should I store it?<span class="ic">+</span></button><div class="a"><p>In a cool, dry place away from direct sunlight. Always use a clean, dry spoon.</p></div></div>
+      <div class="item"><button class="q" onclick="toggleAcc(this)">Does it need refrigeration after opening?<span class="ic">+</span></button><div class="a"><p>Not required. The ghee and honey keep it stable — a clean dry spoon matters far more than the fridge.</p></div></div>
+      <div class="item"><button class="q" onclick="toggleAcc(this)">How long does shipping take?<span class="ic">+</span></button><div class="a"><p>Dispatched within 24–48 hours. Most orders across India arrive in 3–6 working days.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section id="finalcta">
+  <div class="wrap fc-grid">
+    <div class="fc-fig reveal">
+      <div class="speech">Dada toh kehte hi the!</div>
+      <img src="cta_boyjar.jpg" alt="Golu with the jar"/>
+    </div>
+    <div class="fc-right reveal">
+      <div class="eyebrow">Get Yours</div>
+      <h2 class="head dev" style="margin-top:12px">असली है इसलिए आसान है।</h2>
+      <div class="sizes-row" id="sizes2">
+        <button class="size on" data-size="200g" data-price="299" onclick="pickSize(this)">200g</button>
+        <button class="size" data-size="500g" data-price="649" onclick="pickSize(this)">500g</button>
+        <button class="size" data-size="1kg" data-price="1199" onclick="pickSize(this)">1kg</button>
+      </div>
+      <button class="btn btn-brown" onclick="addToCart()">ADD TO CART</button>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap ct-grid">
+    <div class="ct-fig reveal"><img src="contact_girl.jpg" alt="Mishti"/></div>
+    <div class="ct-copy reveal">
+      <div class="eyebrow">Get in touch</div>
+      <h2 class="head">What's on your mind</h2>
+    </div>
+    <form class="ct-form reveal" onsubmit="return sendMsg(event)">
+      <div class="f"><label>Name</label><input required name="name" /></div>
+      <div class="f"><label>Email</label><input required type="email" name="email" /></div>
+      <div class="f full"><label>Message</label><textarea rows="2" name="msg"></textarea></div>
+      <button class="btn btn-brown send" type="submit">SEND</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="flogo dev">चोखो·छे</div>
+      <div><h4>Shop</h4><ul><li><a href="#product">Amlaprash</a></li><li><a href="#ingredients">Ingredients</a></li><li><a href="#reviews">Reviews</a></li><li><a href="#faq">FAQ</a></li></ul></div>
+      <div><h4>Brand</h4><ul><li><a href="#origin">Our story</a></li><li><a href="#trust">Trust</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><h4>Policies</h4><ul><li><a href="#">Shipping</a></li><li><a href="#">Refunds</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+    </div>
+    <div class="fbar"><span>© 2026 ChoKho Chhe · FSSAI 12221027000524</span><span>Sitapura, Jaipur · Recipe from Bikaner</span></div>
+  </div>
+</footer>
+
+<!-- Sticky quick-add -->
+<div id="quickbar">
+  <span class="qp">AmlaPrash</span>
+  <div class="sizes" id="qsizes">
+    <button class="sz on" data-size="200g" data-price="299" onclick="pickSize(this)">200g</button>
+    <button class="sz" data-size="500g" data-price="649" onclick="pickSize(this)">500g</button>
+    <button class="sz" data-size="1kg" data-price="1199" onclick="pickSize(this)">1kg</button>
+  </div>
+  <button class="add" onclick="addToCart()">ADD TO CART</button>
+</div>
+
+<!-- Cart -->
+<div id="ov" onclick="closeCart()"></div>
+<aside id="cart" aria-label="Cart">
+  <div class="ch"><h3>Your cart</h3><button onclick="closeCart()">×</button></div>
+  <div class="items" id="cartItems"></div>
+  <div class="foot"><div class="tot"><span>Total</span><span id="cartTotal">₹0</span></div>
+    <button class="btn btn-brown" style="width:100%" onclick="checkout()">Checkout</button>
+    <div class="note">Secure checkout · Shopify</div></div>
+</aside>
+<div class="toast" id="toast">Added to cart</div>
+
+<script>
+/* ---------- Ingredients data ---------- */
+const INGREDIENTS=[
+["Amla","Emblica officinalis Gaertn."],["Clarified Butter / Ghee","Butyrum clarificatum"],["Bamboo","Bambusa arundinacea"],["Long Pepper / Pippali","Piper longum Linn."],["Indian Bay Leaf / Tejpatra","Cinnamomum tamala Nees & Eberm."],["Ceylon Cinnamon","Cinnamomum zeylanicum Breyn."],["Nagkesar","Mesua ferrea Linn."],["Bael","Aegle marmelos Correa"],["Agarwood","Aquilaria agallocha Roxb."],["Punarnava","Boerhaavia diffusa Linn."],["White Turmeric / Kachur","Curcuma zedoaria Rosc."],["Desmodium","Desmodium bulbifera Desv."],["Green Cardamom","Elettaria cardamomum Maton"],["Gambhari","Gmelina arborea Roxb."],["Pushkarmool","Inula racemosa Hook."],["Mudga Parni","Phaseolus trilobus sensu Alt."],["Bhumi Amla","Phyllanthus niruri Linn."],["Agnimantha","Premna integrifolia Linn."],["Brihati","Solanum indicum Linn."],["Patala","Stereospermum suaveolens"],["Mashaparni","Teramnus labialis Spreng"],["Gokshura","Tribulus terrestris Linn."],["Prishniparni","Uraria picta Desv."],["Grapes","Vitis vinifera Linn."],["Sandalwood","Santalum album Linn."],["Kakoli","Roscoea purpurea"],["Gymnema","Gymnema lactiferum"],["Anantamul","Hemidesmus indicus"],["Bala","Sida cordifolia Linn."],["Kantakari","Solanum xanthocarpum Schrad. & Wendl."],["White Water Lily","Nymphaea alba Linn."],["Gajapippali","Scindapsus officinalis"],["Ganger Chaal","local name"],["Peepal Badi","local name"],["Vasaka","Adhatoda vasica Nees"],["Musta","Cyperus rotundus Linn."],["Kakanasa","Martynia diandra Glox."],["Shyonaka","Oroxylum indicum Vent."],["Karkatashringi","Pistacia integerrima Stewart ex Brandis"],["Red Sandalwood","Pterocarpus santalinus Linn.f."],["Haritaki","Terminalia chebula Retz."],["Guduchi","Tinospora cordifolia Miers ex Hook.f. & Thoms."],["Shatavari","Asparagus racemosus Willd."],["Vidari","Ipomoea digitata Linn."],["Ashwagandha","Withania somnifera Dunal"]
+];
+document.getElementById('itable').innerHTML=INGREDIENTS.map(([n,b])=>`<div class="ing"><b>${n}</b><i>${b}</i></div>`).join('');
+
+/* ---------- State ---------- */
+const state={size:'200g',price:299,qty:1,cart:[]};
+const fmt=n=>'₹'+n.toLocaleString('en-IN');
+function syncSize(){
+  document.querySelectorAll('[data-size]').forEach(b=>b.classList.toggle('on',b.dataset.size===state.size));
+  const now=document.getElementById('priceNow'); if(now) now.textContent=fmt(state.price);
+}
+function pickSize(el){state.size=el.dataset.size;state.price=+el.dataset.price;syncSize();}
+function bumpQty(d){state.qty=Math.max(1,state.qty+d);document.getElementById('qtyVal').textContent=state.qty;}
+
+/* ---------- Cart ---------- */
+function addToCart(buyNow){
+  const f=state.cart.find(i=>i.size===state.size);
+  if(f)f.qty+=state.qty; else state.cart.push({size:state.size,price:state.price,qty:state.qty});
+  state.qty=1;const qv=document.getElementById('qtyVal');if(qv)qv.textContent=1;
+  renderCart();toast('Added · Amlaprash '+state.size);
+  if(buyNow)checkout(); else openCart();
+}
+function removeItem(i){state.cart.splice(i,1);renderCart();}
+function renderCart(){
+  const n=state.cart.reduce((s,i)=>s+i.qty,0);
+  document.getElementById('navCount').textContent=n;
+  const el=document.getElementById('cartItems');
+  el.innerHTML=state.cart.length?state.cart.map((i,idx)=>`
+    <div class="ci"><img src="s1_jar.jpg" alt=""><div><b>Amlaprash</b><span>${i.size} · Qty ${i.qty}</span><div class="rm" onclick="removeItem(${idx})">Remove</div></div><div class="p">${fmt(i.price*i.qty)}</div></div>`).join('')
+    :'<div class="empty">Abhi cart khaali hai.<br>Ek jar add karo 🫙</div>';
+  document.getElementById('cartTotal').textContent=fmt(state.cart.reduce((s,i)=>s+i.price*i.qty,0));
+}
+function openCart(){document.getElementById('ov').classList.add('open');document.getElementById('cart').classList.add('open');}
+function closeCart(){document.getElementById('ov').classList.remove('open');document.getElementById('cart').classList.remove('open');}
+function checkout(){ if(!state.cart.length){openCart();return;} alert('Checkout connects to the ChoKho Chhe Shopify store.\n\nTotal: '+document.getElementById('cartTotal').textContent); }
+renderCart();
+
+/* ---------- UI bits ---------- */
+function toggleMenu(){document.getElementById('menu').classList.toggle('open');}
+function toggleAcc(btn){btn.parentElement.classList.toggle('open');const a=btn.nextElementSibling;
+  a.style.maxHeight=btn.parentElement.classList.contains('open')?a.scrollHeight+'px':0;}
+document.querySelectorAll('.item.open .a').forEach(a=>a.style.maxHeight=a.scrollHeight+'px');
+function swapMain(src){document.querySelector('.prod-media .main img').src=src;}
+let toastT;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('show'),1800);}
+function sendMsg(e){e.preventDefault();e.target.reset();toast('Thanks! We\'ll write back soon.');return false;}
+
+/* smooth anchor scroll */
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+  const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}}));
+
+/* ---------- Animations ---------- */
+if(window.gsap){
+  gsap.registerPlugin(ScrollTrigger);
+  const E='power3.out';
+
+  /* generic scroll reveals — batched with stagger */
+  const revEls=gsap.utils.toArray('.reveal').filter(el=>!el.closest('#hero'));
+  gsap.set(revEls,{opacity:0,y:32});
+  ScrollTrigger.batch(revEls,{start:'top 88%',onEnter:b=>gsap.to(b,{opacity:1,y:0,duration:.85,stagger:.09,ease:E})});
+
+  /* hero intro timeline */
+  gsap.set('#hero .reveal',{opacity:0,y:26});
+  gsap.timeline({delay:.15})
+    .to('#hero .reveal',{opacity:1,y:0,duration:.8,stagger:.1,ease:E})
+    .from('#hero .heroimg img',{opacity:0,y:60,scale:.9,duration:1.1,ease:E},'-=.85');
+
+  /* hero jar: gentle float + scroll parallax */
+  gsap.to('#hero .heroimg img',{y:'-=14',duration:3,ease:'sine.inOut',repeat:-1,yoyo:true,delay:1.1});
+  gsap.to('#hero .heroimg',{yPercent:-12,ease:'none',scrollTrigger:{trigger:'#hero',start:'top top',end:'bottom top',scrub:true}});
+
+  /* story illustrations float, offset phases */
+  gsap.utils.toArray('.scene .pic img').forEach((im,i)=>gsap.to(im,{y:'-=9',duration:2.6+i*.3,ease:'sine.inOut',repeat:-1,yoyo:true,delay:i*.2}));
+
+  /* mascots float */
+  ['.origin-fig img','.fc-fig img','.ct-fig img'].forEach((s,i)=>{const el=document.querySelector(s);if(el)gsap.to(el,{y:'-=10',duration:3+i*.4,ease:'sine.inOut',repeat:-1,yoyo:true});});
+
+  /* "45" count-up + pop */
+  const big=document.querySelector('#ingredients .big45');
+  if(big){const o={v:0};ScrollTrigger.create({trigger:big,start:'top 85%',once:true,onEnter:()=>{
+    gsap.fromTo(big,{scale:.6,opacity:0},{scale:1,opacity:1,duration:.7,ease:'back.out(1.7)'});
+    gsap.to(o,{v:45,duration:1.2,ease:'power2.out',onUpdate:()=>big.textContent=Math.round(o.v)});}});}
+
+  /* ingredient rows cascade in */
+  const rows=gsap.utils.toArray('#itable .ing');
+  gsap.set(rows,{opacity:0,y:18});
+  ScrollTrigger.batch(rows,{start:'top 94%',onEnter:b=>gsap.to(b,{opacity:1,y:0,duration:.5,stagger:.025,ease:E})});
+
+  /* product image subtle parallax */
+  const pm=document.querySelector('.prod-media .main img');
+  if(pm)gsap.to(pm,{yPercent:-6,ease:'none',scrollTrigger:{trigger:'#product',start:'top bottom',end:'bottom top',scrub:true}});
+
+  /* scroll progress bar */
+  gsap.to('#progress',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:.3}});
+
+  /* sticky quick-add bar across story→final CTA */
+  ScrollTrigger.create({trigger:'#story',start:'top 60%',onEnter:()=>qb(true),onLeaveBack:()=>qb(false)});
+  ScrollTrigger.create({trigger:'#finalcta',start:'top 80%',onEnter:()=>qb(false),onLeaveBack:()=>qb(true)});
+}else{document.querySelectorAll('.reveal').forEach(e=>{e.style.opacity=1;e.style.transform='none';});}
+function qb(v){document.getElementById('quickbar').classList.toggle('show',v);}
+</script>
+</body>
+</html>

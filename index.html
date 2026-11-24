@@ -270,7 +270,33 @@ footer .fbar{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,
 .prod-media .thumbs .t:hover{transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(0,0,0,.3)}
 .ing{transition:color .2s}.ing:hover b{color:var(--maroon)}
 .heroimg img,.scene .pic img,.origin-fig img,.fc-fig img,.ct-fig img{will-change:transform}
-@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1!important;transform:none!important}#progress{display:none}}
+/* Pinned scroll-story */
+#story{background:var(--cream)}
+.story-pin{min-height:100svh;display:flex;align-items:center;overflow:hidden}
+.story-stage{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,5vw,64px);align-items:center;width:100%;padding-block:60px}
+@media(max-width:860px){.story-stage{grid-template-columns:1fr;gap:26px}}
+.story-visual{position:relative;width:100%;max-width:440px;aspect-ratio:1/1;margin-inline:auto}
+.story-visual .layer{position:absolute;inset:0;display:grid;place-items:center;opacity:0;will-change:transform,opacity}
+.story-visual .layer img{width:88%;border-radius:20px;box-shadow:0 26px 54px -24px rgba(30,61,40,.45)}
+.story-visual .layer.jar img{width:72%}
+.sv-fx{position:absolute;inset:0;pointer-events:none;z-index:3}
+.sv-fx span{position:absolute;opacity:0;font-size:1.5rem;color:var(--amber)}
+.story-text{position:relative}
+.story-text .eyebrow{margin-bottom:20px;display:block}
+.cap-wrap{position:relative;min-height:200px}
+@media(max-width:860px){.cap-wrap{min-height:160px;text-align:center}}
+.st-cap{position:absolute;inset:0;opacity:0;will-change:transform,opacity}
+.st-cap .sc{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-bottom:12px}
+.st-cap h3{font-weight:600;font-size:clamp(1.8rem,4vw,2.9rem);line-height:1.04;letter-spacing:-.02em;color:var(--green-d)}
+.st-cap h3 em{font-style:italic;color:var(--amber)}
+.st-cap p{color:var(--ink-soft);font-size:1.02rem;margin-top:14px;max-width:38ch}
+@media(max-width:860px){.st-cap p{margin-inline:auto}}
+.story-dots{display:flex;gap:8px;margin-top:30px;position:relative;z-index:2}
+@media(max-width:860px){.story-dots{justify-content:center}}
+.story-dots i{width:26px;height:3px;border-radius:2px;background:var(--line);transition:.35s}
+.story-dots i.on{background:var(--amber);width:38px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.reveal{opacity:1!important;transform:none!important}#progress{display:none}
+  .story-pin{min-height:auto;padding-block:40px}.story-visual .layer,.st-cap{position:relative;opacity:1!important}.sv-fx{display:none}}
 </style>
 </head>
 <body>
@@ -319,16 +345,27 @@ footer .fbar{margin-top:48px;padding-top:22px;border-top:1px solid rgba(255,255,
   </div>
 </section>
 
-<!-- STORY -->
+<!-- STORY (pinned scroll sequence) -->
 <section id="story">
-  <div class="wrap">
-    <div class="eyebrow reveal">The Story</div>
-    <h2 class="head reveal">Golu chakhta hai. Mishti recommend karti hai.</h2>
-    <div class="scenes">
-      <div class="scene c1 reveal"><div class="pic"><img src="s1_jar.jpg" alt="The jar"/></div><div class="txt"><div class="sc">Scene 1</div><div class="st">Nani ko ye pasand aata</div></div></div>
-      <div class="scene c2 reveal"><div class="pic"><img src="s2_boy.jpg" alt="Golu tastes"/></div><div class="txt"><div class="sc">Scene 2 · Golu tastes</div><div class="st">Dadi iske liye haan kar detin</div></div></div>
-      <div class="scene c3 reveal"><div class="pic"><img src="s3_label.jpg" alt="Label unrolls"/></div><div class="txt"><div class="sc">Scene 3 · Label unrolls</div><div class="st">45 ingredients, one label</div></div></div>
-      <div class="scene c4 reveal"><div class="pic"><img src="s4_girl.jpg" alt="Mishti recommends"/></div><div class="txt"><div class="sc">Scene 4 · Mishti recommends</div><div class="st">Dadi ki baat ab sense bana rahi hai</div></div></div>
+  <div class="story-pin" id="storyPin">
+    <div class="wrap story-stage">
+      <div class="story-visual" id="storyVisual">
+        <div class="layer jar" data-s="0"><img src="s1_jar.jpg" alt="The ChoKho Chhe jar"/></div>
+        <div class="layer" data-s="1"><img src="s2_boy.jpg" alt="Golu tastes the amlaprash"/></div>
+        <div class="layer label" data-s="2"><img src="s3_label.jpg" alt="The label unrolls"/></div>
+        <div class="layer" data-s="3"><img src="s4_girl.jpg" alt="Mishti recommends"/></div>
+        <div class="sv-fx" id="svFx"></div>
+      </div>
+      <div class="story-text">
+        <span class="eyebrow">The Story</span>
+        <div class="cap-wrap">
+          <div class="st-cap" data-s="0"><div class="sc">Scene 01</div><h3>Nani ko ye pasand aata.</h3><p>Ek purani jar, ek purana vaada — ghar ka asli amlaprash.</p></div>
+          <div class="st-cap" data-s="1"><div class="sc">Scene 02 · Golu chakhta hai</div><h3>Ek chammach… <em>wah!</em></h3><p>Golu wahi chakhta hai jo chokho ho. Ye seedha pass ho gaya.</p></div>
+          <div class="st-cap" data-s="2"><div class="sc">Scene 03 · Label khulta hai</div><h3>45 cheezein, ek label.</h3><p>Amla, desi ghee, shahad aur 40+ jadi-butiyan — sab likha hua, kuch chhupa nahi.</p></div>
+          <div class="st-cap" data-s="3"><div class="sc">Scene 04 · Mishti recommend karti hai</div><h3>Dadi ki baat ab <em>sense</em> banti hai.</h3><p>Roz ek chammach. Mishti ki guarantee ke saath.</p></div>
+        </div>
+        <div class="story-dots" id="storyDots"><i class="on"></i><i></i><i></i><i></i></div>
+      </div>
     </div>
   </div>
 </section>
@@ -626,6 +663,57 @@ if(window.gsap){
   ScrollTrigger.create({trigger:'#finalcta',start:'top 80%',onEnter:()=>qb(false),onLeaveBack:()=>qb(true)});
 }else{document.querySelectorAll('.reveal').forEach(e=>{e.style.opacity=1;e.style.transform='none';});}
 function qb(v){document.getElementById('quickbar').classList.toggle('show',v);}
+
+/* ===== Pinned scroll-story: scenes play as you scroll ===== */
+(function(){
+  const pin=document.getElementById('storyPin');
+  if(!pin||!window.gsap) return;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const layers=gsap.utils.toArray('#storyVisual .layer');
+  const caps=gsap.utils.toArray('.st-cap');
+  const dots=gsap.utils.toArray('#storyDots i');
+  const fx=document.getElementById('svFx');
+  if(reduce){ layers.forEach(l=>l.style.opacity=1); caps.forEach(c=>c.style.opacity=1); return; }
+
+  gsap.set(layers,{opacity:0,scale:.92});
+  gsap.set(caps,{opacity:0,y:30});
+  gsap.set(layers[0],{opacity:1,scale:1});
+  gsap.set(caps[0],{opacity:1,y:0});
+  const setDot=n=>dots.forEach((d,i)=>d.classList.toggle('on',i===n));
+  function spark(kind){
+    if(!fx) return; fx.innerHTML='';
+    const set = kind==='stars'?['★','★','★']:(kind==='sparkle'?['✨','🌟','✨','✦']:['✦','✦']);
+    set.forEach((c,i)=>{
+      const s=document.createElement('span'); s.textContent=c;
+      s.style.left=(14+Math.random()*68)+'%'; s.style.top=(8+Math.random()*68)+'%';
+      fx.appendChild(s);
+      gsap.fromTo(s,{opacity:0,scale:0,y:12},{opacity:1,scale:1,y:0,duration:.4,delay:i*.07,ease:'back.out(3)'});
+      gsap.to(s,{opacity:0,scale:.6,duration:.5,delay:.8+i*.07});
+    });
+  }
+  const tl=gsap.timeline({scrollTrigger:{
+    trigger:pin, start:'top top', end:'+=320%', pin:true, scrub:1,
+    onUpdate:self=>setDot(Math.min(3,Math.floor(self.progress*3.999)))
+  }});
+  // 0 -> 1 : jar out, Golu tastes in (+ sparkle)
+  tl.to(layers[0],{opacity:0,scale:1.1,duration:.5})
+    .to(caps[0],{opacity:0,y:-30,duration:.4},'<')
+    .fromTo(layers[1],{opacity:0,scale:.9,xPercent:14},{opacity:1,scale:1,xPercent:0,duration:.6,ease:'power2.out',onStart:()=>spark('sparkle')},'>-.1')
+    .fromTo(caps[1],{opacity:0,y:30},{opacity:1,y:0,duration:.5},'<')
+    .to({},{duration:.5})
+  // 1 -> 2 : label unrolls (clip reveal top→bottom)
+    .to(layers[1],{opacity:0,scale:1.08,duration:.5})
+    .to(caps[1],{opacity:0,y:-30,duration:.4},'<')
+    .fromTo(layers[2],{opacity:1,scale:1,clipPath:'inset(0 0 100% 0)'},{opacity:1,clipPath:'inset(0 0 0% 0)',duration:.8,ease:'power2.inOut'},'>-.05')
+    .fromTo(caps[2],{opacity:0,y:30},{opacity:1,y:0,duration:.5},'<.15')
+    .to({},{duration:.5})
+  // 2 -> 3 : Mishti recommends in (+ stars)
+    .to(layers[2],{opacity:0,scale:1.08,duration:.5})
+    .to(caps[2],{opacity:0,y:-30,duration:.4},'<')
+    .fromTo(layers[3],{opacity:0,scale:.9,xPercent:-14},{opacity:1,scale:1,xPercent:0,duration:.6,ease:'power2.out',onStart:()=>spark('stars')},'>-.1')
+    .fromTo(caps[3],{opacity:0,y:30},{opacity:1,y:0,duration:.5},'<')
+    .to({},{duration:.6});
+})();
 </script>
 </body>
 </html>
